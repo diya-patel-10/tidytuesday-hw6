@@ -1,5 +1,5 @@
 ---
-title: "HW 2: Data wrangling"
+title: "HW 6: Statistics Experience"
 subtitle: "STA 199 - Fall 2023 - Sec 2"
 author: "Diya Patel"
 format: pdf
@@ -7,3 +7,44 @@ editor: visual
 ---
 
 ## Packages + data
+
+```{r}
+#| label: load-packages-data
+#| warning: false
+
+library(tidyverse)
+friends_emotions <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-09-08/friends_emotions.csv')
+
+```
+
+
+```{r}
+#| label: visualization
+
+friends_emotions |>
+  mutate(season = as.factor(season),
+         emotion = factor(emotion, levels = c("Mad", "Scared", "Sad", "Neutral",
+                                              "Peaceful", "Joyful", "Powerful")
+                                              )) |>
+  count(season, emotion) |>
+  ggplot(
+    aes(x = season, y = emotion)) +
+  geom_tile(aes(fill = n)) +
+  scale_fill_continuous(trans = 'reverse') +
+  labs(
+    x = "Season",
+    y = "Emotion",
+    fill = "Count",
+    title = "Emotions Expressed in Friends by Season") +
+  theme_minimal()
+```
+
+
+```{r}
+#| label: save-vis
+
+ggsave(
+  filename = "My TidyTuesday Plot.png",
+  device = "png")
+```
+
