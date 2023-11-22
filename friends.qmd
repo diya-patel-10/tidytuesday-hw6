@@ -1,0 +1,5 @@
+title: "HW 6: TidyTuesday Challenge"
+subtitle: "STA 199 - Fall 2023 - Sec 2"
+author: "Diya Patel"
+format: pdf
+editor: visual
